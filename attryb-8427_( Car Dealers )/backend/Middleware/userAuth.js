@@ -1,16 +1,13 @@
 /** @format */
 var jwt = require("jsonwebtoken");
-let dealerAuth = (req, res, next) => {
+let userAuth = (req, res, next) => {
   let token = req.headers.authorization;
   if (token) {
     try {
-      var decoded = jwt.verify(token?.split(" ")[1], "masai");
+      var decoded = jwt.verify(token?.split(" ")[1],"masai")
       if (decoded) {
-        if (decoded.isDealer) {
-          next();
-        } else {
-          res.status(400).send({ msg: "Your are not Dealer" });
-        }
+        console.log(decoded);
+        next();
       } else {
         res.status(400).send({ msg: "Please Login First-2 " });
       }
@@ -21,4 +18,4 @@ let dealerAuth = (req, res, next) => {
     res.status(400).send({ msg: "Please Login first-1" });
   }
 };
-module.exports = { dealerAuth };
+module.exports = { userAuth };

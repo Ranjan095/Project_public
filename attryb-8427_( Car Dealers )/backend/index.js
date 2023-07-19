@@ -2,9 +2,10 @@
 
 let express = require("express");
 const { connection } = require("./db");
-const { userRoute } = require("./Routes/userRoute");
+
 const { dealerRoute } = require("./Routes/dealerRoute");
 const { saleCarRoute } = require("./Routes/saleCarRoute");
+const { userRoute } = require("./Routes/userRoute");
 require("dotenv").config();
 
 let app = express();

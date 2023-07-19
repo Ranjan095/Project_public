@@ -10,12 +10,16 @@ let createDealer = async (req, res) => {
   try {
     bcrypt.hash(password, 5, async (err, hash) => {
       if (hash) {
-        let dealer = new dealerModal({ name, email, password: hash });
-        await dealer.save();
-        // console.log(dealer);
-        res.status(200).send({
-          msg: "Your Account has been created Now You can sale your car",
-        });
+    try {
+      let dealer = new dealerModal({ name, email, password: hash });
+      await dealer.save();
+      // console.log(dealer);
+      res.status(200).send({
+        msg: "Your Account has been created Now You can sale your car",
+      });
+    } catch (error) {
+      res.status(400).send(error)
+    }
       } else {
         res.status(400).send(err);
       }
