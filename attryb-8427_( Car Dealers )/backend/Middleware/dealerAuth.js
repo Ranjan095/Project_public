@@ -6,7 +6,10 @@ let dealerAuth = (req, res, next) => {
     try {
       var decoded = jwt.verify(token?.split(" ")[1], "masai");
       if (decoded) {
+        // console.log(decoded);
         if (decoded.isDealer) {
+          (req.body.author = decoded.author),
+            (req.body.authorId = decoded.authorId);
           next();
         } else {
           res.status(400).send({ msg: "Your are not Dealer" });

@@ -4,16 +4,16 @@ let express = require("express");
 const { connection } = require("./db");
 
 const { dealerRoute } = require("./Routes/dealerRoute");
-const { saleCarRoute } = require("./Routes/saleCarRoute");
 const { userRoute } = require("./Routes/userRoute");
+const { inventoryRoute } = require("./Routes/inventoryRoute");
 require("dotenv").config();
 
 let app = express();
 app.use(express.json());
 
 app.use("/user", userRoute);
-app.use("/dealer", dealerRoute);
-app.use("/inventory", saleCarRoute);
+// app.use("/dealer", dealerRoute);
+app.use("/inventory", inventoryRoute);
 
 app.listen(process.env.PORT, async () => {
   try {

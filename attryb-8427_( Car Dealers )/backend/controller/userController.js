@@ -33,7 +33,7 @@ let createUser = async (req, res) => {
 // for get all user
 let getUser = async (req, res) => {
   try {
-    let user = await userModal.find(req.query); //.populate("saleCar");
+    let user = await userModal.find(req.query).populate("salesCar");
     res.status(200).send(user);
   } catch (error) {
     res.status(400).send(error.message);
@@ -49,7 +49,7 @@ let loginUser = async (req, res) => {
       bcrypt.compare(password, user.password, function (err, result) {
         if (result) {
           var token = jwt.sign(
-            { author: user.name, email: user.email, isDealer: user.isDealer },
+            { author: user.name, authorId: user._id, isDealer: user.isDealer },
             "masai"
           );
           res.status(200).send({ msg: "Login Successful", token });

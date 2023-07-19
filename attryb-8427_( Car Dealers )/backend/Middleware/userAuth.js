@@ -6,7 +6,7 @@ let userAuth = (req, res, next) => {
     try {
       var decoded = jwt.verify(token?.split(" ")[1],"masai")
       if (decoded) {
-        console.log(decoded);
+        // console.log(decoded);
         next();
       } else {
         res.status(400).send({ msg: "Please Login First-2 " });
